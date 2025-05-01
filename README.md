@@ -1,5 +1,5 @@
-# AyahaUnityDevelopRepositoryTemplate
-作ったUnity関係のリポジトリのテンプレート
+# MaterialDuplicator
+Unityでマテリアルをテクスチャごと複製してマテリアルも複製するツール
 
 # 導入方法
 # 使い方
