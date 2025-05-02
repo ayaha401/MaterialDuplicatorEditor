@@ -83,8 +83,14 @@ namespace AyahaGraphicDevelopTools.MaterialDuplicate
 
                 for (int i = 0; i < _materialsProperty.arraySize; i++)
                 {
-                    var targetMat = _materialsProperty.GetArrayElementAtIndex(i);
-                    DuplicateMaterialAndTexture(targetMat.objectReferenceValue as Material);
+                    var targetMat = _materialsProperty.GetArrayElementAtIndex(i).objectReferenceValue as Material;
+
+                    if (targetMat == null)
+                    {
+                        continue;
+                    }
+                    
+                    DuplicateMaterialAndTexture(targetMat);
                 }
 
                 AssetDatabase.SaveAssets();
@@ -146,9 +152,7 @@ namespace AyahaGraphicDevelopTools.MaterialDuplicate
                 string texturePath = AssetDatabase.GetAssetPath(tex);
                 string textureExt = Path.GetExtension(texturePath);
                 string textureName = Path.GetFileNameWithoutExtension(texturePath);
-                string newTexturePath =
-                    AssetDatabase.GenerateUniqueAssetPath(
-                        $"{_duplicateTextureSaveFolder}/{textureName}_Copy{textureExt}");
+                string newTexturePath = AssetDatabase.GenerateUniqueAssetPath($"{_duplicateTextureSaveFolder}/{textureName}_Copy{textureExt}");
 
                 if (AssetDatabase.CopyAsset(texturePath, newTexturePath))
                 {
